@@ -1,8 +1,8 @@
 <template>
   <div>
     <Nav />
-    <Cover/>
+    <Cover />
     <slot />
-    <AudioPlayer/>
+    <AudioPlayer />
   </div>
 </template>

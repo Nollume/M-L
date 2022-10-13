@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed w-full h-12 flex justify-between bg-stone-800 px-4">
+  <div class="fixed w-full h-12 flex justify-between bg-stone-800 px-4 z-50">
     <div>
       <img
         class="w-auto h-full"

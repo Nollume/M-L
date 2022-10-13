@@ -4,7 +4,7 @@
       <source srcset="~/assets/img/SC4.jpg" media="(min-width: 600px)" />
       <img src="~/assets/img/FB4 .jpg" alt="" />
     </picture>
-    <div
+    <!-- <div
       class="absolute mt-12 top-0 bottom-0 left-0 right-[60%] flex items-center justify-center"
     >
       <h1 class="italic text-center">
@@ -12,7 +12,7 @@
         better when it is<br />
         Mark & Lukas...
       </h1>
-    </div>
+    </div> -->
   </div>
 </template>
 
