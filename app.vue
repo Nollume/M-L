@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout class="relative min-h-screen">
+  <NuxtLayout class="relative min-h-screen overflow-hidden">
     <NuxtPage />
   </NuxtLayout>
 </template>
@@ -10,4 +10,8 @@ useHead({
 });
 </script>
 
-<style></style>
+<style>
+.router-link-exact-active {
+  @apply text-orange-600;
+}
+</style>

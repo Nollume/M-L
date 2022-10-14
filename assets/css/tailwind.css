@@ -7,7 +7,7 @@
 @layer base {
   body {
     font-family: "Karla", sans-serif;
-    @apply text-stone-200;
+    @apply text-stone-200 bg-stone-900;
   }
 }
 
@@ -46,5 +46,23 @@
   .progress-bar::-webkit-progress-value {
     @apply bg-orange-600;
   }
+  .menu {
+    @apply grid grid-cols-2 gap-0.5 place-items-center w-7 h-7 ml-auto cursor-pointer;
+  }
+  .menu div {
+    @apply w-3 aspect-square bg-orange-600 duration-300 ease-in-out;
+  }
 
+  .menu-cross :first-child {
+    @apply scale-y-[0.2] rotate-45 translate-x-1 translate-y-1;
+  }
+  .menu-cross :nth-child(2) {
+    @apply scale-y-[0.2] -rotate-45;
+  }
+  .menu-cross :nth-child(3) {
+    @apply scale-y-[0.2] -rotate-45;
+  }
+  .menu-cross :last-child {
+    @apply scale-y-[0.2] rotate-45 -translate-x-1 -translate-y-1;
+  }
 }

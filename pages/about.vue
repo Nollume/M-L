@@ -1,13 +1,12 @@
 <template>
-    <div>
-        <h2>About</h2>
-    </div>
+  <div class="h-screen relative bg-stone-900">
+    <div
+      class="absolute h-6 w-full bottom-full bg-gradient-to-t from-stone-900 to-transparent"
+    ></div>
+    <p>About</p>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
