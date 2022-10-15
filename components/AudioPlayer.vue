@@ -1,16 +1,16 @@
 <template>
   <div
-    class="py-2 will-change-auto px-4 fixed bottom-0 h-16 w-full bg-stone-800 flex flex-col items-center justify-evenly z-40 duration-500 ease-in-out border-t border-orange-600"
-    :class="isExpand ? 'h-1/2 gap-1' : 'h-16 gap-0'"
+    class="audio-player-container"
+    :class="store.openNav ? 'h-1/2 gap-1 after:scale-x-100' : 'h-16 gap-0'"
   >
     <Transition name="disapear">
-      <div v-show="isOptionsVisible" class="order-2 flex gap-4 items-center">
+      <div v-show="store.showLinks" class="order-2 flex gap-4 items-center">
         <button title="Previous"><IconsNext class="rotate-180" /></button>
         <button
           title="Play"
           v-if="!isPlaying"
           @click="playTrack"
-          class="rounded-full bg-stone-900 p-2"
+          class="rounded-full bg-stone-900 p-2 hover:text-orange-500 active:text-orange-500"
         >
           <IconsPlay />
         </button>
@@ -35,7 +35,7 @@
           </button>
           <button @click="mute" v-else><IconsVolumeHigh /></button>
           <div
-            v-show="isExpand"
+            v-show="store.openNav"
             class="flex items-center absolute bottom-full invisible"
           >
             <input
@@ -57,16 +57,18 @@
           </div>
           <div class="text-xs w-3 hidden">{{ volume }}</div>
         </div>
-        <button v-if="!isExpand" @click="expandPlayer"><IconsExpand /></button>
-        <button v-if="isExpand" @click="narrowPlayer">
+        <button v-if="!store.openNav" @click="store.openNavigation">
+          <IconsExpand />
+        </button>
+        <button v-if="store.openNav" @click="store.openNavigation">
           <IconsMinimalize />
         </button>
       </div>
     </Transition>
     <Transition name="fade">
-      <div v-show="isOptionsVisible" class="order-3 flex items-center gap-2">
+      <div v-show="store.showLinks" class="order-3 flex items-center gap-2">
         <div>
-          <p class="text-xs">{{ currentDuration }}</p>
+          <p class="text-xs w-8">{{ currentDuration }}</p>
         </div>
         <div class="flex items-center relative">
           <input
@@ -87,13 +89,13 @@
           ></progress>
         </div>
         <div>
-          <p class="text-xs">{{ duration }}</p>
+          <p class="text-xs w-8">{{ duration }}</p>
         </div>
       </div>
     </Transition>
     <Transition name="fadeIn">
       <div
-        v-if="isExpand"
+        v-if="store.openNav"
         class="order-1 flex items-center justify-evenly gap-2"
       >
         <div class="py-0.5 flex-[1]">
@@ -124,23 +126,27 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from "~/stores/store";
 import { formatTime } from "~/functions";
 import throttle from "lodash.throttle";
+
 const stringiring = ref("Dreams, Where I'm Fading (Original mix)");
+
 const currentTrack = ref<HTMLAudioElement>(null);
+const progressBar = ref<HTMLProgressElement>(null);
+const progressBarVolume = ref<HTMLProgressElement>(null);
+
 const isPlaying = ref(false);
 const isRepeating = ref(false);
-const isExpand = ref(false);
 let duration = ref<string>("00:00");
 let currentDuration = ref<string>("00:00");
 const volume = ref(100);
 const previousVolume = ref(100);
 const sliderValue = ref(0);
-const progressBar = ref<HTMLProgressElement>(null);
-const progressBarVolume = ref<HTMLProgressElement>(null);
-const isOptionsVisible = ref(true);
 
 let timeout: ReturnType<typeof setTimeout>;
+
+const store = useStore();
 
 const playTrack = () => {
   currentTrack.value.play();
@@ -229,29 +235,11 @@ const tick = () => {
     clearInterval(timeout);
   }
 };
-
-/**
- * Music-Player expand
- */
-const expandPlayer = () => {
-  isExpand.value = true;
-  isOptionsVisible.value = false;
-  setTimeout(() => {
-    isOptionsVisible.value = true;
-  }, 500);
-};
-const narrowPlayer = () => {
-  isExpand.value = false;
-  isOptionsVisible.value = false;
-  setTimeout(() => {
-    isOptionsVisible.value = true;
-  }, 500);
-};
 </script>
 
 <style scoped>
 .fadeIn-enter-active {
-  animation: fade-in 0.75s;
+  animation: fade-in 1s;
 }
 .fadeIn-leave-active {
   animation: fade-in 0.25s reverse;
@@ -271,12 +259,13 @@ const narrowPlayer = () => {
     opacity: 1;
   }
 }
-
-.fade-enter-active,
-.disapear-enter-active,
 .fade-leave-active,
 .disapear-leave-active {
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-in-out;
+}
+.fade-enter-active,
+.disapear-enter-active {
+  transition: all 0.5s ease-in-out;
 }
 
 .fade-leave-to,

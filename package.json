@@ -12,10 +12,12 @@
     "nuxt": "3.0.0-rc.11"
   },
   "dependencies": {
+    "@nuxtjs/composition-api": "^0.33.1",
     "@pinia/nuxt": "^0.4.3",
     "@types/lodash.debounce": "^4.0.7",
     "@types/lodash.throttle": "^4.1.7",
     "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "pinia": "^2.0.23"
   }
 }
