@@ -3,6 +3,7 @@
     <Nav />
     <Cover />
     <slot />
-    <AudioPlayer />
+
+    <AudioPlayer/>
   </div>
 </template>

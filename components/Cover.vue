@@ -1,18 +1,12 @@
 <template>
-  <div class="pt-12 relative">
+  <div class="pt-12 fixed top-0 w-full z-40">
     <picture>
-      <source srcset="~/assets/img/SC4.jpg" media="(min-width: 600px)" />
+      <source srcset="~/assets/img/SC4.jpg" media="(min-width: 640px)" />
       <img src="~/assets/img/FB4 .jpg" alt="" />
     </picture>
-    <!-- <div
-      class="absolute mt-12 top-0 bottom-0 left-0 right-[60%] flex items-center justify-center"
-    >
-      <h1 class="italic text-center">
-        The sound is <br />
-        better when it is<br />
-        Mark & Lukas...
-      </h1>
-    </div> -->
+    <div
+      class="absolute h-6 w-full bottom-0 bg-gradient-to-t from-stone-900 to-transparent"
+    ></div>
   </div>
 </template>
 
