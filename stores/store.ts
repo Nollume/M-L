@@ -7,8 +7,6 @@ export const useStore = defineStore("store", {
     showLinks: true as boolean,
     loading: false as boolean,
     error: "" as string,
-    remixes: [] as allMusicData[],
-    tracks: [] as allMusicData[],
     allData: [] as allMusicData[],
     loadData: {
       artistName: "Mark & Lukas",
@@ -61,15 +59,15 @@ export const useStore = defineStore("store", {
         ]);
         const data = await Promise.all(results.map((result) => result.json()));
 
-        this.remixes = data[0].results.filter((track: any) => {
+        const remixes = data[0].results.filter((track: any) => {
           return (
             track.trackCensoredName.includes("Mark & Lukas") &&
             track.trackCensoredName.includes("Remix")
           );
         });
-        this.tracks = data[1].results;
+        const tracks = data[1].results;
 
-        this.allData = [...data[1].results, ...data[0].results];
+        this.allData = [...tracks, ...remixes];
       } catch (error) {
         this.error = error.message;
       } finally {
@@ -84,10 +82,10 @@ export const useStore = defineStore("store", {
       collectionName: string,
       trackId: number
     ) {
+      this.isPlaying = true;
       if (this.loadData.trackId === trackId) {
-        
+        return;
       } else {
-       
         this.loadData = {
           artistName,
           trackCensoredName,
@@ -97,6 +95,39 @@ export const useStore = defineStore("store", {
           trackId,
         };
       }
+    },
+    getTrackIndex() {
+      const id = this.loadData.trackId;
+      const indexCurrentTrack = this.allData.findIndex(
+        (track: allMusicData) => {
+          return track.trackId === id;
+        }
+      );
+      return indexCurrentTrack;
+    },
+    loadNextOrPreviousTrack(data: string) {
+      if (this.getTrackIndex() === 0 && data === "prev") return;
+      if (this.getTrackIndex() === this.allData.length - 1 && data === "next")
+        return;
+      const nextOrPreviousTrack = this.allData.find(
+        (track: allMusicData, index: number) => {
+          if (data === "next") {
+            return index === this.getTrackIndex() + 1;
+          } else if (data === "prev") {
+            return index === this.getTrackIndex() - 1;
+          }
+        }
+      );
+
+      this.loadData = {
+        artistName: nextOrPreviousTrack.artistName,
+        trackCensoredName: nextOrPreviousTrack.trackCensoredName,
+        previewUrl: nextOrPreviousTrack.previewUrl,
+        artworkUrl60: nextOrPreviousTrack.artworkUrl60,
+        collectionName: nextOrPreviousTrack.collectionName,
+        trackId: nextOrPreviousTrack.trackId,
+      };
+
       this.isPlaying = true;
     },
   },

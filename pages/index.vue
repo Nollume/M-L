@@ -3,7 +3,7 @@
     <div class="mt-12 w-full aspect-[21/8] sm:aspect-[62/13]"></div>
     <ul class="w-full px-2 mx-auto pt-2 pb-16 flex flex-col gap-2 sm:pt-6">
       <li
-        v-for="(track, index) in store.tracks"
+        v-for="(track, index) in store.allData"
         :key="track.trackId"
         class="flex gap-2 list"
       >
@@ -72,5 +72,4 @@
 <script setup lang="ts">
 import { useStore } from "~/stores/store";
 const store = useStore();
-
 </script>

@@ -5,7 +5,13 @@
   >
     <Transition name="disapear">
       <div v-show="store.showLinks" class="order-2 flex gap-4 items-center">
-        <button title="Previous"><IconsNext class="rotate-180" /></button>
+        <button
+          @dblclick="store.loadNextOrPreviousTrack('prev')"
+          @click="playFromStart"
+          title="Previous"
+        >
+          <IconsNext class="rotate-180" />
+        </button>
         <button
           title="Play"
           v-if="!isPlaying"
@@ -22,7 +28,17 @@
         >
           <IconsPause />
         </button>
-        <button title="Next"><IconsNext /></button>
+        <button
+          :disabled="store.getTrackIndex() === store.allData.length - 1"
+          :class="{
+            'opacity-25 cursor-not-allowed':
+              store.getTrackIndex() === store.allData.length - 1,
+          }"
+          @click="store.loadNextOrPreviousTrack('next')"
+          title="Next"
+        >
+          <IconsNext />
+        </button>
         <button @click="repeatTrack" title="Repeat">
           <IconsRepeat :class="{ 'text-orange-600': isRepeating }" />
         </button>
@@ -92,7 +108,6 @@
           <p class="text-xs w-8">{{ duration }}</p>
         </div>
       </div>
-      
     </Transition>
     <AudioPlayerTrackInfo />
     <div>
@@ -113,7 +128,7 @@ const progressBarVolume = ref<HTMLProgressElement>(null);
 const volume = ref(100);
 const sliderValue = ref(0);
 const duration = ref("00:00");
-const  currentDuration = ref("00:00");
+const currentDuration = ref("00:00");
 
 let timeout: ReturnType<typeof setTimeout>;
 const store = useStore();
@@ -187,23 +202,44 @@ const tick = () => {
    * if track end, reset
    */
   if (currentTrack.value?.ended && !isRepeating.value) {
-    isPlaying.value = false;
-    currentDuration.value = "00:00";
-    sliderValue.value = 0;
-    progressBar.value.value = 0;
-    clearInterval(timeout);
+    if (store.getTrackIndex() === store.allData.length - 1) {
+      isPlaying.value = false;
+      currentDuration.value = "00:00";
+      sliderValue.value = 0;
+      progressBar.value.value = 0;
+    } else {
+      store.loadNextOrPreviousTrack("next");
+    }
   }
 };
 
-watch(loadData, () => {
-  isPlaying.value = false;
-  clearInterval(timeout);
+const playFromStart = () => {
+  if (isPlaying.value) {
+    clearInterval(timeout);
+    isPlaying.value = false;
+    currentTrack.value.load();
+    setTimeout(() => {
+      isPlaying.value = true;
+    }, 200);
+  } else {
+    clearInterval(timeout);
+    isPlaying.value = false;
+    currentTrack.value.load();
+    currentDuration.value = "00:00";
+    sliderValue.value = 0;
+    progressBar.value.value = 0;
+  }
+};
 
-  currentTrack.value.load();
-  setTimeout(() => {
-    isPlaying.value = true;
-  }, 200);
+/**
+ * watch new data in player
+ */
+
+watch(loadData, () => {
+  playFromStart();
 });
+
+// watch if plaing or not
 
 watch(isPlaying, () => {
   if (isPlaying.value === false) {
