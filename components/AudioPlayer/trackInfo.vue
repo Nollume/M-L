@@ -13,15 +13,13 @@
           />
         </div>
         <div class="flex-[2]">
-          <h4 class="whitespace-nowrap pb-0.5 border-b border-orange-600">
+          <h4 class=" pb-0.5 border-b border-orange-600">
             {{ loadData.artistName }}
           </h4>
           <p class="text-xs pt-1 inline">
             {{ loadData.trackCensoredName }}
           </p>
-          <p class="text-xs pt-1 border-t border-orange-600">
-            {{ loadData.collectionName }}
-          </p>
+          
         </div>
       </div>
     </Transition>

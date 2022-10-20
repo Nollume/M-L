@@ -1,7 +1,6 @@
 <template>
   <div class="h-full relative bg-stone-900">
-    <div class="mt-12 w-full aspect-[21/8] sm:aspect-[62/13]"></div>
-    <ul class="w-full px-2 mx-auto pt-2 pb-16 flex flex-col gap-2 sm:pt-6">
+    <ul class="w-full px-3 mx-auto pt-2 pb-16 flex flex-col gap-2 sm:pt-6">
       <li
         v-for="(track, index) in store.allData"
         :key="track.trackId"
@@ -39,7 +38,7 @@
             <div
               v-else-if="store.isPlaying"
               @click="store.isPlaying = false"
-              class="icon-play"
+              class="icon-play opacity-100"
             >
               <div class="bg-orange-600 p-1.5 rounded-full">
                 <IconsPause class="text-stone-200" />
@@ -61,7 +60,11 @@
       </li>
     </ul>
     <div v-if="store.loading" class="grid place-items-center">
-      <img class="scale-75" src="~/assets/img/1493.gif" alt="loading..." />
+      <img
+        class="scale-[0.25]"
+        src="~/assets/img/Eclipse-1s-187px.gif"
+        alt="loading..."
+      />
     </div>
     <p v-if="store.error" class="grid place-items-center">
       {{ store.error + " :(" }}

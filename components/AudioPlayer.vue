@@ -3,8 +3,9 @@
     class="audio-player-container"
     :class="store.openNav ? 'h-1/2 gap-1 after:scale-x-100' : 'h-16 gap-0'"
   >
+    <AudioPlayerTrackInfo />
     <Transition name="disapear">
-      <div v-show="store.showLinks" class="order-2 flex gap-4 items-center">
+      <div v-show="store.showLinks" class="flex gap-4 items-center">
         <button
           @dblclick="store.loadNextOrPreviousTrack('prev')"
           @click="playFromStart"
@@ -82,7 +83,7 @@
       </div>
     </Transition>
     <Transition name="fade">
-      <div v-show="store.showLinks" class="order-3 flex items-center gap-2">
+      <div v-show="store.showLinks" class="flex items-center gap-2">
         <div>
           <p class="text-xs w-8">{{ currentDuration }}</p>
         </div>
@@ -109,7 +110,7 @@
         </div>
       </div>
     </Transition>
-    <AudioPlayerTrackInfo />
+
     <div>
       <audio ref="currentTrack" class="invisible">
         <source :src="loadData.previewUrl" type="audio/mp3" />
@@ -217,6 +218,7 @@ const playFromStart = () => {
   if (isPlaying.value) {
     clearInterval(timeout);
     isPlaying.value = false;
+
     currentTrack.value.load();
     setTimeout(() => {
       isPlaying.value = true;
@@ -224,6 +226,7 @@ const playFromStart = () => {
   } else {
     clearInterval(timeout);
     isPlaying.value = false;
+
     currentTrack.value.load();
     currentDuration.value = "00:00";
     sliderValue.value = 0;

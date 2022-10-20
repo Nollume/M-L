@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-12 fixed top-0 w-full z-40">
+  <div class="pt-12 relative top-0 w-full z-40">
     <picture>
       <source srcset="~/assets/img/SC4.jpg" media="(min-width: 640px)" />
       <img src="~/assets/img/FB4 .jpg" alt="" />
