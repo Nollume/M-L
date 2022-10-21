@@ -1,4 +1,3 @@
-import { isTemplateNode } from "@vue/compiler-core";
 import { defineStore } from "pinia";
 import { musicObject, allMusicData } from "~/interfaces";
 
@@ -35,6 +34,16 @@ export const useStore = defineStore("store", {
         minutes
       )}:${this.fortmatTimeToString(seconds)}`;
       return result;
+    },
+    validateSearch(name: string) {
+      const validate = name
+        .toLowerCase()
+        .replace(/[^\w\s]/gi, "")
+        .replace(/ {2,}/g, " ")
+        .replace(/ /g, "")
+        .trim();
+
+      return validate;
     },
     openNavigation() {
       this.openNav = !this.openNav;

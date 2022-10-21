@@ -1,11 +1,15 @@
 <template>
   <div
-    class="audio-player-container"
-    :class="store.openNav ? 'h-1/2 gap-1 after:scale-x-100' : 'h-16 gap-0'"
+    v-if="store.allData.length"
+    class="audio-player-container gap-1"
+    :class="store.openNav ? 'h-1/2  after:scale-x-100' : 'h-[5.5rem]'"
   >
     <AudioPlayerTrackInfo />
     <Transition name="disapear">
-      <div v-show="store.showLinks" class="flex gap-4 items-center">
+      <div
+        v-show="store.showLinks"
+        class="flex gap-4 items-center rounded-sm bg-stone-900 border border-orange-700 py-1 px-2 shadow-orange-700 shadow-md"
+      >
         <button
           @dblclick="store.loadNextOrPreviousTrack('prev')"
           @click="playFromStart"
@@ -17,14 +21,14 @@
           title="Play"
           v-if="!isPlaying"
           @click="isPlaying = true"
-          class="rounded-full bg-stone-900 p-2 hover:text-orange-500 active:text-orange-500"
+          class="rounded-full p-2 bg-stone-800 hover:text-orange-500 active:text-orange-500"
         >
           <IconsPlay />
         </button>
         <button
           v-else
           title="Pause"
-          class="rounded-full bg-stone-900 p-2"
+          class="rounded-full p-2 bg-stone-800"
           @click="pauseTrack"
         >
           <IconsPause />
@@ -32,14 +36,14 @@
         <button
           :disabled="store.getTrackIndex() === store.allData.length - 1"
           :class="{
-            'opacity-25 cursor-not-allowed':
-              store.getTrackIndex() === store.allData.length - 1,
+            'opacity-25': store.getTrackIndex() === store.allData.length - 1,
           }"
           @click="store.loadNextOrPreviousTrack('next')"
           title="Next"
         >
           <IconsNext />
         </button>
+
         <button @click="repeatTrack" title="Repeat">
           <IconsRepeat :class="{ 'text-orange-600': isRepeating }" />
         </button>

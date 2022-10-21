@@ -43,4 +43,10 @@ interface allMusicData {
   isStreamable: boolean;
 }
 
-export { musicObject, allMusicData };
+enum tracks {
+  ALL = "All",
+  ORIGINALS = "Originals",
+  REMIXES = "Remixes",
+}
+
+export { musicObject, allMusicData, tracks };
