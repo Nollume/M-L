@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout class="relative min-h-screen overflow-hidden">
+  <NuxtLayout class="relative min-h-screen max-w-[100rem] mx-auto ">
     <NuxtPage />
   </NuxtLayout>
 </template>
@@ -13,6 +13,14 @@ useHead({
 });
 
 store.getMusic();
+
+onMounted(() => {
+  store.screenResolution();
+  window.addEventListener(
+    "resize",
+    store.screenResolution
+  );
+});
 </script>
 
 <style>

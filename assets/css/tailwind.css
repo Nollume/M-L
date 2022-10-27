@@ -29,7 +29,7 @@
 
 @layer components {
   .icon {
-    @apply stroke-current w-4 h-auto duration-500  hover:scale-105 active:scale-125;
+    @apply stroke-current w-4 h-auto duration-500 hover:scale-105 active:scale-125 lg:w-6 lg:h-6;
   }
 
   .range-inputs {
@@ -88,10 +88,10 @@
     @apply h-0.5 w-full duration-300 scale-x-0 origin-left bottom-0 left-0 bg-orange-500;
   }
   .nav-container {
-    @apply fixed w-full will-change-auto bg-stone-800 px-4 py-2 z-50 duration-500 ease-in-out after:absolute after:h-0.5 after:bg-orange-600 after:w-1/2 after:left-0 after:bottom-0 after:scale-x-0 after:origin-left after:duration-500 after:ease-linear;
+    @apply fixed w-full top-0 left-0 right-0  will-change-auto bg-stone-800 px-4 py-2 z-50 duration-500 ease-in-out after:absolute after:h-0.5 after:bg-orange-600 after:w-1/2 after:left-0 after:bottom-0 after:scale-x-0 after:origin-left after:duration-500 after:ease-linear;
   }
   .audio-player-container {
-    @apply py-2 will-change-auto px-4 fixed bottom-0 h-16 w-full bg-stone-800 flex flex-col  items-center justify-evenly z-50 duration-500 ease-in-out after:absolute after:h-0.5 after:bg-orange-600 after:w-1/2 after:right-0 after:bottom-full after:scale-x-0 after:origin-right after:duration-500 after:ease-linear;
+    @apply py-2 will-change-auto px-4 fixed bottom-0 left-0 right-0  h-16 w-full bg-stone-800 flex flex-col  items-center justify-evenly z-50 duration-500 ease-in-out after:absolute after:h-0.5 after:bg-orange-600 after:w-1/2 after:right-0 after:bottom-full after:scale-x-0 after:origin-right after:duration-500 after:ease-linear 2xl:justify-center;
   }
 
   .icon-play {
@@ -102,18 +102,22 @@
     @apply opacity-100 scale-100;
   }
   .input-radio {
-    @apply cursor-pointer appearance-none duration-300 w-3 aspect-square shadow-stone-800 shadow-lg rounded-sm bg-stone-200 border  checked:bg-orange-600 border-stone-800 checked:shadow-orange-700;
+    @apply cursor-pointer appearance-none duration-300 w-3 aspect-square shadow-stone-800 shadow-lg rounded-sm bg-stone-200 border  checked:bg-orange-600 border-stone-800 checked:shadow-orange-700 lg:w-6;
   }
   .input-radio:checked ~ label {
     @apply text-orange-600 duration-300;
   }
   .search {
-    @apply text-orange-600 shadow-orange-700 shadow-md focus:shadow-lg focus:shadow-orange-700 outline-none bg-stone-800 box-border py-1 px-3 rounded-sm duration-500 ease-in-out caret-orange-600;
+    @apply text-orange-600 shadow-orange-700 shadow-md focus:shadow-lg focus:shadow-orange-700 outline-none bg-stone-800 box-border py-1 pr-3 pl-6 rounded-sm duration-500 ease-in-out caret-orange-600;
   }
   .search::-webkit-input-placeholder {
     @apply text-orange-600 opacity-80;
   }
   .search::-ms-input-placeholder {
     @apply text-orange-600 opacity-80;
+  }
+  .headline {
+    @apply capitalize border-b border-orange-600 small:text-center lg:border-b-2;
+    font-size: clamp(1.5rem, 4vw, 3rem);
   }
 }

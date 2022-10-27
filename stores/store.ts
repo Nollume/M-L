@@ -5,6 +5,7 @@ export const useStore = defineStore("store", {
   state: () => ({
     openNav: false as boolean,
     showLinks: true as boolean,
+    hamburgerMenu: true as boolean,
     loading: false as boolean,
     error: "" as string,
     allData: [] as allMusicData[],
@@ -46,11 +47,14 @@ export const useStore = defineStore("store", {
       return validate;
     },
     openNavigation() {
-      this.openNav = !this.openNav;
-      this.showLinks = false;
-      setTimeout(() => {
-        this.showLinks = true;
-      }, 500);
+      if (this.hamburgerMenu) {
+        this.openNav = !this.openNav;
+        this.showLinks = false;
+        setTimeout(() => {
+          this.showLinks = true;
+        }, 500);
+      }
+      return;
     },
     async getMusic() {
       this.loading = true;
@@ -99,9 +103,6 @@ export const useStore = defineStore("store", {
           );
         });
 
-        /**
-         * filter out same tracks
-         */
         const allTracks = [...originals, ...remixes];
 
         const uniqueTracks = allTracks.reduce((acc, curr: allMusicData) => {
@@ -185,6 +186,17 @@ export const useStore = defineStore("store", {
       };
 
       this.isPlaying = true;
+    },
+    screenResolution() {
+      let mql = window.matchMedia("(min-width: 1023px)");
+
+      if (mql.matches) {
+        this.openNav = true;
+        this.hamburgerMenu = false;
+      } else {
+        this.openNav = false;
+        this.hamburgerMenu = true;
+      }
     },
   },
 });

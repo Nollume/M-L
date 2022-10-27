@@ -1,28 +1,39 @@
 <template>
-  <div class="h-full relative bg-stone-900">
-    <FilterTracks
-      @optionFilter="popularity = $event"
-      @searchValue="search = $event"
-    />
-    <TrackList :filterData="filterData" />
-    <div v-if="store.loading" class="grid place-items-center">
-      <img
-        class="scale-[0.25]"
-        src="~/assets/img/Eclipse-1s-187px.gif"
-        alt="loading..."
+  <div
+    class="relative bg-stone-900 lg:h-screen lg:overflow-y-hidden lg:absolute lg:top-0 lg:right-0 lg:left-0"
+  >
+    <div class="lg:grid lg:grid-cols-2 lg:h-screen">
+      <div
+        class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[62/13] w-full mb-12"
+      ></div>
+
+      <FilterTracks
+        @optionFilter="popularity = $event"
+        @searchValue="search = $event"
       />
+      <TrackList
+        :filterData="filterData"
+        class="lg:row-start-2 lg:col-start-2"
+      />
+      <div v-if="store.loading" class="grid place-items-center">
+        <img
+          class="scale-[0.25]"
+          src="~/assets/img/Eclipse-1s-187px.gif"
+          alt="loading..."
+        />
+      </div>
+      <p v-if="store.error" class="grid place-items-center">
+        {{ store.error + " :(" }}
+      </p>
     </div>
-    <p v-if="store.error" class="grid place-items-center">
-      {{ store.error + " :(" }}
-    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { tracks } from "~/interfaces";
 import { useStore } from "~/stores/store";
-import debounce from "lodash.debounce";
 const store = useStore();
+
 const popularity = ref<tracks>(tracks.ALL);
 const search = ref("");
 

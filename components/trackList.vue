@@ -1,9 +1,11 @@
 <template>
-  <ul class="w-full px-3 mx-auto pt-2 pb-24 flex flex-col gap-2 sm:pt-6">
+  <ul
+    class="w-full px-3 mx-auto pt-2 pb-24 flex flex-col gap-2 sm:pt-6 lg:overflow-y-scroll"
+  >
     <li
       v-for="(track, index) in filterData"
       :key="track.trackId"
-      class="flex gap-2 list"
+      class="flex gap-2 list lg:px-4"
     >
       <div class="flex items-center gap-2">
         <p class="text-xs w-5 hidden sm:block">
@@ -56,6 +58,11 @@
         </div>
         <p class="text-xs inline">{{ track.trackCensoredName }}</p>
       </article>
+    </li>
+    <li>
+      <div
+        class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[31/13] w-full mb-14"
+      ></div>
     </li>
   </ul>
 </template>

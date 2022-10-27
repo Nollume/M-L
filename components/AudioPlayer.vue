@@ -1,14 +1,18 @@
 <template>
   <div
     v-if="store.allData.length"
-    class="audio-player-container gap-1"
-    :class="store.openNav ? 'h-1/2  after:scale-x-100' : 'h-[5.5rem]'"
+    class="audio-player-container gap-1 lg:after:hidden 2xl:gap-32"
+    :class="
+      store.openNav
+        ? 'h-1/2  after:scale-x-100 lg:h-20 lg:flex-row '
+        : 'h-20 sm:flex-row'
+    "
   >
     <AudioPlayerTrackInfo />
     <Transition name="disapear">
       <div
         v-show="store.showLinks"
-        class="flex gap-4 items-center rounded-sm bg-stone-900 border border-orange-700 py-1 px-2 shadow-orange-700 shadow-md"
+        class="flex gap-4 items-center rounded-sm py-1 px-2"
       >
         <button
           @dblclick="store.loadNextOrPreviousTrack('prev')"
@@ -21,14 +25,14 @@
           title="Play"
           v-if="!isPlaying"
           @click="isPlaying = true"
-          class="rounded-full p-2 bg-stone-800 hover:text-orange-500 active:text-orange-500"
+          class="rounded-full p-2 bg-stone-800 border border-orange-600"
         >
           <IconsPlay />
         </button>
         <button
           v-else
           title="Pause"
-          class="rounded-full p-2 bg-stone-800"
+          class="rounded-full p-2 bg-stone-800 border border-orange-600"
           @click="pauseTrack"
         >
           <IconsPause />
@@ -47,20 +51,26 @@
         <button @click="repeatTrack" title="Repeat">
           <IconsRepeat :class="{ 'text-orange-600': isRepeating }" />
         </button>
-        <div class="flex gap-2 items-center relative">
+        <div
+          @mouseenter="showSlider = true"
+          @mouseleave="showSlider = false"
+          class="flex gap-2 items-center relative"
+        >
           <button @click="turnOnVolume" v-if="volume == 0">
             <IconsMute />
           </button>
           <button @click="mute" v-else-if="volume >= 1 && volume < 75">
             <IconsVolumeLow />
           </button>
-          <button @click="mute" v-else><IconsVolumeHigh /></button>
+          <button @click="mute" v-else>
+            <IconsVolumeHigh />
+          </button>
           <div
-            v-show="store.openNav"
-            class="flex items-center absolute bottom-full invisible"
+            v-show="showSlider"
+            class="flex items-center absolute bottom-full invisible lg:visible z-50"
           >
             <input
-              class="range-inputs w-10 z-50"
+              class="range-inputs w-14 z-50"
               @input="setVolume"
               v-model="volume"
               min="0"
@@ -69,19 +79,27 @@
               name="volume"
             />
             <progress
-              class="progress-bar w-10"
+              class="progress-bar w-14"
               min="0"
               max="100"
               value="100"
               ref="progressBarVolume"
             ></progress>
           </div>
-          <div class="text-xs w-3 hidden">{{ volume }}</div>
+          <div class="w-3 hidden lg:block">{{ volume }}</div>
         </div>
-        <button v-if="!store.openNav" @click="store.openNavigation">
+        <button
+          v-if="!store.openNav"
+          class="lg:hidden"
+          @click="store.openNavigation"
+        >
           <IconsExpand />
         </button>
-        <button v-if="store.openNav" @click="store.openNavigation">
+        <button
+          v-if="store.openNav"
+          class="lg:hidden"
+          @click="store.openNavigation"
+        >
           <IconsMinimalize />
         </button>
       </div>
@@ -89,7 +107,7 @@
     <Transition name="fade">
       <div v-show="store.showLinks" class="flex items-center gap-2">
         <div>
-          <p class="text-xs w-8">{{ currentDuration }}</p>
+          <p class="text-xs w-8 lg:w-11 lg:text-base">{{ currentDuration }}</p>
         </div>
         <div class="flex items-center relative">
           <input
@@ -110,16 +128,15 @@
           ></progress>
         </div>
         <div>
-          <p class="text-xs w-8">{{ duration }}</p>
+          <p class="text-xs w-8 lg:w-11 lg:text-base">{{ duration }}</p>
         </div>
       </div>
     </Transition>
-
-    <div>
-      <audio ref="currentTrack" class="invisible">
-        <source :src="loadData.previewUrl" type="audio/mp3" />
-      </audio>
-    </div>
+  </div>
+  <div>
+    <audio ref="currentTrack" class="invisible">
+      <source :src="loadData.previewUrl" type="audio/mp3" />
+    </audio>
   </div>
 </template>
 
@@ -134,6 +151,7 @@ const volume = ref(100);
 const sliderValue = ref(0);
 const duration = ref("00:00");
 const currentDuration = ref("00:00");
+const showSlider = ref(false);
 
 let timeout: ReturnType<typeof setTimeout>;
 const store = useStore();
@@ -182,9 +200,6 @@ const seekTo = throttle(() => {
   tick();
   if (sliderValue.value === 100 && !isRepeating.value) {
     pauseTrack();
-    currentDuration.value = "00:00";
-    sliderValue.value = 0;
-    progressBar.value.value = 0;
   }
   if (!isPlaying.value) {
     clearInterval(timeout);

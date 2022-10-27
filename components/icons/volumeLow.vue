@@ -2,7 +2,7 @@
   <div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="icon"
+      class="icon lg:w-6 lg:h-6"
       width="44"
       height="44"
       viewBox="0 0 24 24"
