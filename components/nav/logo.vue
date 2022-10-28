@@ -6,7 +6,7 @@
   >
     <img
       class="w-16 h-auto"
-      src="~/assets/img/mark-lukas-logo-white-transparent.png"
+      src="/img/mark-lukas-logo-white-transparent.png"
       alt="Mark & Lukas Logo"
     />
   </NuxtLink>

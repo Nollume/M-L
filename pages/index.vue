@@ -18,7 +18,7 @@
       <div v-if="store.loading" class="grid place-items-center">
         <img
           class="scale-[0.25]"
-          src="~/assets/img/Eclipse-1s-187px.gif"
+          src="/img/Eclipse-1s-187px.gif"
           alt="loading..."
         />
       </div>

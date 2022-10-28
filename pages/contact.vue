@@ -19,7 +19,7 @@
       </p>
       <div class="max-w-md mx-auto">
         <img
-          src="~/assets/img/131894466_4814682081935244_5450224886984955812_n.jpg"
+          src="/img/131894466_4814682081935244_5450224886984955812_n.jpg"
           alt="M & L in the studio"
         />
       </div>

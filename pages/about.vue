@@ -25,8 +25,8 @@
         </div>
         <div class="xl:w-1/2 xl:ml-auto">
           <img
-            src="~/assets/img/13415543_496748167191694_9050900854967624356_o.jpg"
-            alt=""
+            src="/img/13415543_496748167191694_9050900854967624356_o.jpg"
+            alt="mark & lukas"
           />
         </div>
       </div>
@@ -57,8 +57,8 @@
         </div>
         <div class="md:row-start-1 md:col-start-1 xl:w-1/2 xl:mr-auto">
           <img
-            src="@/assets/img/69418358_392656221450485_4661783320126816256_n.jpg"
-            alt=""
+            src="/img/69418358_392656221450485_4661783320126816256_n.jpg"
+            alt="mark & lukas"
           />
         </div>
         <p class="md:hidden">
