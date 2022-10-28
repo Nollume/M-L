@@ -1,10 +1,10 @@
 <template>
   <div
-    class="relative bg-stone-900 lg:h-screen lg:overflow-y-hidden lg:absolute lg:top-0 lg:right-0 lg:left-0"
+    class="relative px-3 bg-stone-900 sm:px-6 lg:h-screen lg:overflow-y-hidden lg:px-0 lg:absolute lg:top-0 lg:right-0 lg:left-0"
   >
     <div class="lg:grid lg:grid-cols-2 lg:h-screen">
       <div
-        class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[62/13] w-full mb-12"
+        class="hidden aspect-[62/13] w-full mb-12 lg:block lg:row-start-1 lg:col-span-2"
       ></div>
 
       <FilterTracks
@@ -65,5 +65,10 @@ const filterData = computed(() => {
       });
     }
   }
+});
+
+watchEffect(() => {
+  store.filteredData = filterData.value;
+
 });
 </script>

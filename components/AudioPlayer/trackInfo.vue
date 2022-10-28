@@ -3,16 +3,20 @@
     <Transition name="fadeIn">
       <div
         v-if="store.openNav"
-        class="flex items-center justify-start gap-2 lg:h-full lg:w-80"
+        class="flex items-center justify-start h-24 gap-2 lg:h-full lg:w-80"
       >
-        <div class="py-0.5">
-          <img class="h-full w-auto" :src="loadData.artworkUrl60" alt="" />
+        <div class="py-0.5 flex items-center sm:h-full">
+          <img
+            class="w-24 h-auto lg:h-full lg:w-auto"
+            :src="loadData.artworkUrl60"
+            alt=""
+          />
         </div>
         <div class="w-full">
           <h4 class="pb-0.5 border-b border-orange-600 whitespace-nowrap">
             {{ loadData.artistName }}
           </h4>
-          <p class="text-xs pt-1">
+          <p class="text-xs pt-1 sm:text-sm">
             {{ loadData.trackCensoredName }}
           </p>
         </div>

@@ -9,6 +9,7 @@ export const useStore = defineStore("store", {
     loading: false as boolean,
     error: "" as string,
     allData: [] as allMusicData[],
+    filteredData: [] as allMusicData[],
     loadData: {
       artistName: "Mark & Lukas",
       trackCensoredName: "Life is about Moments",
@@ -155,7 +156,7 @@ export const useStore = defineStore("store", {
     },
     getTrackIndex() {
       const id = this.loadData.trackId;
-      const indexCurrentTrack = this.allData.findIndex(
+      const indexCurrentTrack = this.filteredData.findIndex(
         (track: allMusicData) => {
           return track.trackId === id;
         }
@@ -164,9 +165,12 @@ export const useStore = defineStore("store", {
     },
     loadNextOrPreviousTrack(data: string) {
       if (this.getTrackIndex() === 0 && data === "prev") return;
-      if (this.getTrackIndex() === this.allData.length - 1 && data === "next")
+      if (
+        this.getTrackIndex() === this.filteredData.length - 1 &&
+        data === "next"
+      )
         return;
-      const nextOrPreviousTrack = this.allData.find(
+      const nextOrPreviousTrack = this.filteredData.find(
         (track: allMusicData, index: number) => {
           if (data === "next") {
             return index === this.getTrackIndex() + 1;

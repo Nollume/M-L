@@ -37,7 +37,7 @@
           <div
             v-else-if="store.isPlaying"
             @click="store.isPlaying = false"
-            class="icon-play opacity-100"
+            class="icon-play opacity-100 lg:scale-100"
           >
             <div class="bg-orange-600 p-1.5 rounded-full">
               <IconsPause class="text-stone-200" />
@@ -49,14 +49,14 @@
         class="flex-1 flex flex-col justify-evenly px-2 rounded-sm bg-[#201D1C]"
       >
         <div class="flex justify-between">
-          <h4 class="font-bold text-sm">
+          <h4 class="font-bold text-sm md:text-base">
             {{ track.artistName }}
           </h4>
           <p v-if="track.releaseDate" class="hidden sm:block">
             {{ new Date(track.releaseDate).toLocaleDateString() }}
           </p>
         </div>
-        <p class="text-xs inline">{{ track.trackCensoredName }}</p>
+        <p class="text-xs inline md:text-sm">{{ track.trackCensoredName }}</p>
       </article>
     </li>
     <li>

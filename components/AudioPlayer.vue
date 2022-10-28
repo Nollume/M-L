@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="store.allData.length"
+    v-if="store.filteredData.length"
     class="audio-player-container gap-1 lg:after:hidden 2xl:gap-32"
     :class="
       store.openNav
@@ -38,9 +38,10 @@
           <IconsPause />
         </button>
         <button
-          :disabled="store.getTrackIndex() === store.allData.length - 1"
+          :disabled="store.getTrackIndex() === store.filteredData.length - 1"
           :class="{
-            'opacity-25': store.getTrackIndex() === store.allData.length - 1,
+            'opacity-25':
+              store.getTrackIndex() === store.filteredData.length - 1,
           }"
           @click="store.loadNextOrPreviousTrack('next')"
           title="Next"
@@ -107,7 +108,9 @@
     <Transition name="fade">
       <div v-show="store.showLinks" class="flex items-center gap-2">
         <div>
-          <p class="text-xs w-8 lg:w-11 lg:text-base">{{ currentDuration }}</p>
+          <p class="text-xs w-8 md:w-9 md:text-sm lg:w-11 lg:text-base">
+            {{ currentDuration }}
+          </p>
         </div>
         <div class="flex items-center relative">
           <input
@@ -128,7 +131,9 @@
           ></progress>
         </div>
         <div>
-          <p class="text-xs w-8 lg:w-11 lg:text-base">{{ duration }}</p>
+          <p class="text-xs w-8 md:w-9 md:text-sm lg:w-11 lg:text-base">
+            {{ duration }}
+          </p>
         </div>
       </div>
     </Transition>
@@ -222,7 +227,7 @@ const tick = () => {
    * if track end, reset
    */
   if (currentTrack.value?.ended && !isRepeating.value) {
-    if (store.getTrackIndex() === store.allData.length - 1) {
+    if (store.getTrackIndex() === store.filteredData.length - 1) {
       isPlaying.value = false;
       currentDuration.value = "00:00";
       sliderValue.value = 0;

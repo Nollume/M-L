@@ -27,9 +27,16 @@
   }
 }
 
+@layer utilities {
+  .write-mode {
+    writing-mode: vertical-lr;
+    @apply rotate-180;
+  }
+}
+
 @layer components {
   .icon {
-    @apply stroke-current w-4 h-auto duration-500 hover:scale-105 active:scale-125 lg:w-6 lg:h-6;
+    @apply stroke-current w-4 h-auto duration-500 hover:scale-110 active:scale-110 md:w-5 lg:w-6 lg:h-6;
   }
 
   .range-inputs {
@@ -102,7 +109,7 @@
     @apply opacity-100 scale-100;
   }
   .input-radio {
-    @apply cursor-pointer appearance-none duration-300 w-3 aspect-square shadow-stone-800 shadow-lg rounded-sm bg-stone-200 border  checked:bg-orange-600 border-stone-800 checked:shadow-orange-700 lg:w-6;
+    @apply cursor-pointer appearance-none duration-300 w-3 aspect-square shadow-stone-800 shadow-lg rounded-sm bg-stone-200 border  checked:bg-orange-600 border-stone-800 checked:shadow-orange-700 md:w-5  lg:w-6;
   }
   .input-radio:checked ~ label {
     @apply text-orange-600 duration-300;
@@ -119,5 +126,11 @@
   .headline {
     @apply capitalize border-b border-orange-600 small:text-center lg:border-b-2;
     font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+  .cover::after {
+    @apply hidden w-6 h-full right-0 top-0 bg-gradient-to-l from-stone-900 to-transparent 2xl:block;
+  }
+  .cover::before {
+    @apply hidden w-6 h-full left-0 top-0 bg-gradient-to-r from-stone-900 to-transparent 2xl:block;
   }
 }

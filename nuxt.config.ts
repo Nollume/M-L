@@ -4,4 +4,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
   },
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
 });
