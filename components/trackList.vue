@@ -59,6 +59,9 @@
         <p class="text-xs inline md:text-sm">{{ track.trackCensoredName }}</p>
       </article>
     </li>
+    <li v-if="!filterData.length && search.length">
+      <p class="text-center lg:text-xl">Couldn't find that track.</p>
+    </li>
     <li>
       <div
         class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[31/13] w-full mb-14"
@@ -74,6 +77,7 @@ const store = useStore();
 
 interface propsOptions {
   filterData: allMusicData[];
+  search: string;
 }
 
 const props = defineProps<propsOptions>();

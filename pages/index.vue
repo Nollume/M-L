@@ -13,6 +13,7 @@
       />
       <TrackList
         :filterData="filterData"
+        :search="search"
         class="lg:row-start-2 lg:col-start-2"
       />
       <div v-if="store.loading" class="grid place-items-center">
