@@ -6,7 +6,6 @@
 
 <script setup lang="ts">
 import { useStore } from "~/stores/store";
-import { allMusicData } from "./interfaces";
 const store = useStore();
 
 useHead({
@@ -20,8 +19,8 @@ useHead({
   ],
 });
 
-store.getMusic();
 onMounted(() => {
+  store.getMusic();
   store.screenResolution();
   window.addEventListener("resize", store.screenResolution);
 });
