@@ -2,6 +2,23 @@
   <ul
     class="w-full px-3 mx-auto pt-2 pb-24 flex flex-col gap-2 sm:pt-6 lg:overflow-y-scroll"
   >
+    <li v-if="store.loading || store.error">
+      <div v-if="store.loading" class="grid place-items-center">
+        <img
+          class="scale-[0.25]"
+          src="/img/Eclipse-1s-187px.gif"
+          alt="loading..."
+        />
+      </div>
+      <p v-if="store.error" class="grid place-items-center">
+        {{ store.error + " :(" }}
+      </p>
+    </li>
+    <li class="order-3">
+      <div
+        class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[31/13] w-full mb-14"
+      ></div>
+    </li>
     <li
       v-for="(track, index) in filterData"
       :key="track.trackId"
@@ -61,11 +78,6 @@
     </li>
     <li v-if="!filterData.length && search.length">
       <p class="text-center lg:text-xl">Couldn't find that track.</p>
-    </li>
-    <li>
-      <div
-        class="hidden lg:block lg:row-start-1 lg:col-span-2 aspect-[31/13] w-full mb-14"
-      ></div>
     </li>
   </ul>
 </template>

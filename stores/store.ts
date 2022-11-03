@@ -64,14 +64,15 @@ export const useStore = defineStore("store", {
           fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(
               "Mark & Lukas remix"
-            )}&entity=musicTrack&media=music&limit=200`
+            )}&entity=musicTrack&media=music&limit=100`
           ),
           fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(
               "Mark&Lukas"
-            )}&entity=musicTrack&media=music&limit=200`
+            )}&entity=musicTrack&media=music&limit=100`
           ),
         ]);
+
         const data = await Promise.all(results.map((result) => result.json()));
 
         /**

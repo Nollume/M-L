@@ -11,21 +11,12 @@
         @optionFilter="popularity = $event"
         @searchValue="search = $event"
       />
+     
       <TrackList
         :filterData="filterData"
         :search="search"
         class="lg:row-start-2 lg:col-start-2"
       />
-      <div v-if="store.loading" class="grid place-items-center">
-        <img
-          class="scale-[0.25]"
-          src="/img/Eclipse-1s-187px.gif"
-          alt="loading..."
-        />
-      </div>
-      <p v-if="store.error" class="grid place-items-center">
-        {{ store.error + " :(" }}
-      </p>
     </div>
   </div>
 </template>
@@ -70,6 +61,5 @@ const filterData = computed(() => {
 
 watchEffect(() => {
   store.filteredData = filterData.value;
-
 });
 </script>
