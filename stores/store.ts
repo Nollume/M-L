@@ -64,12 +64,12 @@ export const useStore = defineStore("store", {
           fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(
               "Mark & Lukas remix"
-            )}&entity=musicTrack&media=music&limit=100`
+            )}&entity=musicTrack&media=music&limit=120`
           ),
           fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(
               "Mark&Lukas"
-            )}&entity=musicTrack&media=music&limit=100`
+            )}&entity=musicTrack&media=music&limit=120`
           ),
         ]);
 
