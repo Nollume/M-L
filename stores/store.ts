@@ -61,16 +61,8 @@ export const useStore = defineStore("store", {
       this.loading = true;
       try {
         const results = await Promise.all([
-          fetch(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(
-              "Mark & Lukas remix"
-            )}&entity=musicTrack&media=music&limit=120`
-          ),
-          fetch(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(
-              "Mark&Lukas"
-            )}&entity=musicTrack&media=music&limit=120`
-          ),
+          fetch("/api/remixes"),
+          fetch("/api/tracks"),
         ]);
 
         const data = await Promise.all(results.map((result) => result.json()));
@@ -192,6 +184,7 @@ export const useStore = defineStore("store", {
 
       this.isPlaying = true;
     },
+
     screenResolution() {
       let mql = window.matchMedia("(min-width: 1023px)");
 

@@ -5,7 +5,7 @@
       name="fadeFromLeft"
       class="flex items-center pb-8 justify-center gap-4 my-auto lg:pb-0 lg:flex-col lg:pt-12"
     >
-      <li v-if="store.showLinks">
+      <li v-if="store.showLinks" key="0">
         <a
           href="https://www.facebook.com/MarkandLukas"
           target="_blank"
@@ -14,7 +14,7 @@
           <IconsFb class="w-6" />
         </a>
       </li>
-      <li v-if="store.showLinks">
+      <li v-if="store.showLinks" key="1">
         <a
           href="https://twitter.com/markandlukas"
           target="_blank"
@@ -23,7 +23,7 @@
           <IconsTwitter class="w-6" />
         </a>
       </li>
-      <li v-if="store.showLinks">
+      <li v-if="store.showLinks" key="2">
         <a
           href="https://soundcloud.com/mark-lukas-1"
           target="_blank"
@@ -32,7 +32,7 @@
           <IconsSoundcloud class="w-6" />
         </a>
       </li>
-      <li v-if="store.showLinks">
+      <li v-if="store.showLinks" key="3">
         <a
           href="https://open.spotify.com/artist/5RO3il4O2kpXI6nAfLT9xr"
           target="_blank"

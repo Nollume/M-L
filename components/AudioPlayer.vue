@@ -254,7 +254,9 @@ const playFromStart = () => {
     currentTrack.value.load();
     currentDuration.value = "00:00";
     sliderValue.value = 0;
-    progressBar.value.value = 0;
+    if (progressBar.value) {
+      progressBar.value.value = 0;
+    }
   }
 };
 
@@ -264,6 +266,15 @@ const playFromStart = () => {
 
 watch(loadData, () => {
   playFromStart();
+  localStorage.setItem("tracks", JSON.stringify(loadData.value));
+});
+
+onMounted(() => {
+  if (!localStorage.getItem("tracks")) {
+    localStorage.setItem("tracks", JSON.stringify(loadData.value));
+  } else {
+    loadData.value = JSON.parse(localStorage.getItem("tracks"));
+  }
 });
 
 // watch if plaing or not
